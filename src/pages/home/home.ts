@@ -3,6 +3,7 @@ import { NavController, MenuController } from 'ionic-angular';
 import { IonicPage } from '../../../node_modules/ionic-angular/navigation/ionic-page';
 import { CategoriasPage } from '../categorias/categorias';
 import { takeUntil } from '../../../node_modules/rxjs/operator/takeUntil';
+import { CredenciaisDTO } from '../../models/credenciais.dto';
 
 @IonicPage()
 @Component({
@@ -10,6 +11,11 @@ import { takeUntil } from '../../../node_modules/rxjs/operator/takeUntil';
   templateUrl: 'home.html'
 })
 export class HomePage {
+
+  creds: CredenciaisDTO = {
+    email: "",
+    senha: ""
+  }
 
   constructor(public navCtrl: NavController, public menu: MenuController) {
 
@@ -24,6 +30,7 @@ export class HomePage {
   }
 
   login() {
+    console.log(this.creds)
     this.navCtrl.setRoot('CategoriasPage')
   }
 }
