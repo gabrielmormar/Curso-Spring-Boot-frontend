@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { IonicPage } from '../../../node_modules/ionic-angular/navigation/ionic-page';
 import { CategoriasPage } from '../categorias/categorias';
+import { takeUntil } from '../../../node_modules/rxjs/operator/takeUntil';
 
 @IonicPage()
 @Component({
@@ -10,8 +11,16 @@ import { CategoriasPage } from '../categorias/categorias';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public menu: MenuController) {
 
+  }
+
+  ionViewWillEnter() {
+    this.menu.swipeEnable(false)
+  }
+
+  ionViewDidLeave() {
+    this.menu.swipeEnable(true)
   }
 
   login() {
