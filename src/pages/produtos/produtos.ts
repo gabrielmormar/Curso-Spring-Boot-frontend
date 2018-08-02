@@ -20,6 +20,10 @@ export class ProdutosPage {
 	}
 
 	ionViewDidLoad() {
+		this.loadData()
+	}
+
+	loadData() {
 		let categoria_id = this.navParams.get('categoria_id')
 		let loader = this.presentLoading()
 		this.produtoService.findByCategoria(categoria_id)
@@ -28,9 +32,9 @@ export class ProdutosPage {
 				this.items = response['content']
 				this.loadImageUrl()
 			},
-			error => {
-				loader.dismiss()
-			})
+				error => {
+					loader.dismiss()
+				})
 	}
 
 	loadImageUrl() {
@@ -40,12 +44,12 @@ export class ProdutosPage {
 				.subscribe(response => {
 					item.imageUrl = `${API_CONFIG.bucketBaseUrl}/prod${item.id}-small.jpg`
 				},
-				error => { })			
+					error => { })
 		}
 	}
 
 	showDetail(produto_id: string) {
-		this.navCtrl.push('ProdutoDetailPage', {produto_id: produto_id})
+		this.navCtrl.push('ProdutoDetailPage', { produto_id: produto_id })
 	}
 
 	presentLoading() {
@@ -55,6 +59,13 @@ export class ProdutosPage {
 		})
 		loader.present()
 		return loader
+	}
+
+	doRefresh(refresher) {
+		this.loadData()
+		setTimeout(() => {
+			refresher.complete();
+		}, 600);
 	}
 
 }
