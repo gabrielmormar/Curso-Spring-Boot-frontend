@@ -1,5 +1,7 @@
 {
   "name": "EloShop",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }
